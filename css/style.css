@@ -1,0 +1,60 @@
+body {
+  background: #FFFFFF;
+  color: #333;
+  font-size: 11px;
+  height: auto;
+  padding-bottom: 20px;
+  font-family: Helvetica, 'Helvetica Neue', Arial, sans-serif;
+}
+
+div {
+	display: block;
+}
+
+.rulethick {
+	border-top: 3px solid #333;
+}
+
+a {
+  color: #333;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+  color: #FF3300;
+}
+
+h1 {
+  font-family: Helvetica, 'Helvetica Neue', sans-serif;
+  font-weight: 800;
+  text-align: left;
+  font-size: 10em;
+}
+
+
+h2 {
+  text-align: left;
+}
+
+p {
+  overflow: hidden;
+  padding: 10px 0;
+  text-align: left;
+}
+
+.container_12,
+.container_16,
+.container_24 {
+  background-color: #fff;
+  margin-bottom: 20px;
+  margin-top: 120px;
+}
+
+.information-title {
+	padding-bottom: 10px;
+}
+
+.header {
+	padding-bottom: 70px;
+}
