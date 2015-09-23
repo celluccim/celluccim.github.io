@@ -1,0 +1,21 @@
+<!DOCTYPE html> <!-- this is always here; lets it know that yes this document will be read as only html-->
+<HTML> <!-- capitalization doesn't matter--> 
+	<head> <!--always comes before the body to get the page started-->
+		<meta charset="utf-8" /> <!-- character encoding - required tag that must be present in the head of every document; /> = </meta> close tag-->
+		<title>
+			{% if page.title %} 
+				{{page.title}}
+			{% else %}
+				My Default Title
+			{% endif %}
+		</title> <!--great for browsers, bookmarks, screen readers, and SEO-->
+		<link rel="stylesheet" href="new.css" />
+		<link rel="stylesheet" href="hw2.css" />
+	</head>
+
+	<body>
+		{{content}}
+	</body>
+
+
+</html>
