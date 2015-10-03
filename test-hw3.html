@@ -1,0 +1,65 @@
+---
+layout: default
+title: Attempting Javascript and D3 
+---
+
+
+
+<svg width="1500" height="120">
+</svg>
+
+<button id="start">start</button>
+
+<script>
+
+	var dataArray = [
+		{"x": 0, "length": 100, "color": "black"},
+		{"x": 100, "length": 100, "color": "black"},
+		{"x": 200, "length": 100, "color": "black"},
+		{"x": 300, "length": 100, "color": "black"},
+		{"x": 400, "length": 100, "color": "black"}
+	];
+
+	var dataArray2 = [
+		{"x": 0, "length": 100, "color": "#ffbcf8"},
+		{"x": 100, "length": 100, "color": "#ff9460"},
+		{"x": 200, "length": 100, "color": "#3e6697"},
+		{"x": 300, "length": 100, "color": "#ffd93a"},
+		{"x": 400, "length": 100, "color": "#2dd375"}
+	];
+
+	function draw(data){
+
+		// defining the variables we're working with, which are circles
+		var square = d3.select("svg").selectAll("rect")
+			.data(data, function(d){
+				return d.color;
+			});
+
+		square.enter().append("rect")
+			.attr("y", 60)
+			.style("fill", function(d){
+				return d.color;
+			})
+		
+		square.transition().duration(1000)
+			.style("fill", function(d){
+				return d.color;
+			})
+
+		square.exit().transition().duration(1000)
+			.attr("length", 0).remove()
+			.attr("length", 0).remove();
+
+	}
+
+	draw(dataArray);
+	d3.select("#start").on("click", function(){
+		draw(dataArray2);
+	});
+
+	
+</script>
+
+
+

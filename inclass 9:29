@@ -1,0 +1,118 @@
+inclass 9/29
+
+	var myNumber = 4;
+
+	myNumber = myNumber + 10;
+
+	console.log(12);
+	console.log(myNumber);
+
+
+	var myString = "Javascript is Cool!";
+	myString = myString + "Maggie";
+
+	console.log(myString);
+
+
+	var myBoolean = 10 == 40;
+
+	console.log(myBoolean);
+
+
+	var myArray = ["one", "two", "three", 4];
+	console.log(myArray);
+	console.log(myArray[1]);
+
+	//comment
+	//comment
+
+	var myObject = {
+		"name": "Maggie",
+		"color": "red"
+	}
+
+	var key = "name";
+	console.log(myObject); 
+	console.log(myObject["name"]); //string name you are looking for
+	console.log(myObject.name);
+	console.log(myObject[key]); //variable defined as the key
+
+
+	var sayText = function(txt, txt2){ //to define the function
+		console.log(txt + " " + txt2);
+	}
+
+	sayText("Hello!", "Hi!"); //to run the function
+	sayText("Goodbye!", "Bye!"); //to run the function
+
+
+	var plusTen = function(num) {
+		var newNum = num + 10;
+		return newNum;
+	}
+
+	var thirty = plusTen(20);
+	console.log(thirty);
+
+
+	function greaterThanTen(myNum){
+		var myNum = 12;
+
+		if(myNum > 10){
+			console.log("greater than 10!");
+		}
+
+		else if (myNum == 10){
+			console.log("equal to 10!");
+		}
+
+		else {
+			console.log("less than 10!");
+		}
+
+		return myNum >10;
+	}
+	
+
+	var h1 = document.getElementById("name");
+	h1.innerHTML = "Maggie";
+	console.log(h1);
+
+
+	console.log(d3.max([2, 3, 4, 6, 12, 43254]))
+
+
+	//var h1 = d3.select("#name").text("Maggie");
+	//h1.text("Boo").text("Hi");
+	//console.log(h1.node());
+
+
+	var h1 = d3.select("#name")
+	.attr("class", "big")
+	.style("color", "red");
+
+	console.log(h1);
+
+
+	//http://bost.ocks.org/mike/circles/ demo
+	// also see top of document for circle values
+	
+	var dataArray3 = [10, 20, 30];
+
+	var circle = d3.selectAll("circle")
+		.data(dataArray3);
+
+	circle 
+		.attr("r", function(dataPoint){
+			return dataPoint;
+		})
+		.style("fill", "steelBlue");
+
+	console.log(circle)
+
+
+
+
+
+
+

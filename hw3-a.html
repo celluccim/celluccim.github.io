@@ -1,0 +1,96 @@
+---
+layout: default
+title: d3?
+---
+<div>
+<svg width="1400" height="120">
+
+</svg>
+</div>
+
+<button id="start">start</button>
+
+<script>
+	
+	var dataArray = [
+		{"x": 0, "squareLength": 100, "color": "#333"},
+		{"x": 100, "squareLength": 100, "color": "#333"},
+		{"x": 200, "squareLength": 100, "color": "#333"},
+		{"x": 300, "squareLength": 100, "color": "#333"},
+		{"x": 400, "squareLength": 100, "color": "#333"},
+		{"x": 500, "squareLength": 100, "color": "#333"},
+		{"x": 600, "squareLength": 100, "color": "#333"},
+		{"x": 700, "squareLength": 100, "color": "#333"},
+		{"x": 800, "squareLength": 100, "color": "#333"},
+		{"x": 900, "squareLength": 100, "color": "#333"},
+		{"x": 1000, "squareLength": 100, "color": "#333"},
+		{"x": 1100, "squareLength": 100, "color": "#333"},
+		{"x": 1200, "squareLength": 100, "color": "#333"},
+		{"x": 1300, "squareLength": 100, "color": "#333"},
+		{"x": 1400, "squareLength": 100, "color": "#333"}
+	];
+
+	var dataArray2 = [
+		{"x": 0, "squareLength": 100, "color": "#ffbcf8"},
+		{"x": 100, "squareLength": 100, "color": "#ff9460"},
+		{"x": 200, "squareLength": 100, "color": "#3e6697"},
+		{"x": 300, "squareLength": 100, "color": "#ffd93a"},
+		{"x": 400, "squareLength": 100, "color": "#1a2c61"},
+		{"x": 500, "squareLength": 100, "color": "#a6bdc6"},
+		{"x": 600, "squareLength": 100, "color": "#2dd375"},
+		{"x": 700, "squareLength": 100, "color": "#41316a"},
+		{"x": 800, "squareLength": 100, "color": "#a5d9f2"},
+		{"x": 900, "squareLength": 100, "color": "#a5f885"},
+		{"x": 1000, "squareLength": 100, "color": "#a59fef"},
+		{"x": 1100, "squareLength": 100, "color": "#f48e86"},
+		{"x": 1200, "squareLength": 100, "color": "#338e86"},
+		{"x": 1300, "squareLength": 100, "color": "#07524a"},
+		{"x": 1400, "squareLength": 100, "color": "#c17765"}
+	];
+
+	function draw(data){
+
+		// defining the variables we're working with, which are circles
+		var square = d3.select("svg").selectAll("rect")
+			.data(data);
+
+		square.enter().append("rect")
+			.attr("y", 20)
+			.style("fill", function(d){
+				return d.color;
+
+			})
+			// .attr("width", 10)
+			// .attr("height", 10);
+
+		square.transition().duration(2000)
+			.attr("width", function(dataPoint){
+				return dataPoint.squareLength;
+			})
+			.attr("height", function(dataPoint){
+				return dataPoint.squareLength;
+			})
+			.style("fill", function(d){
+				return d.color;
+			})
+			.attr("x", function (d){
+				return d.x;
+			})
+
+		square.exit().transition().duration(1000)
+		.attr("width", 0).remove()
+		.attr("height", 0).remove();
+	}
+
+
+
+	draw(dataArray);
+	d3.select("#start").on("click", function(){
+		draw(dataArray2);
+	});
+		
+
+
+
+
+</script>
