@@ -1,0 +1,92 @@
+---
+layout: default
+title: Baby Names
+---
+
+<!-- Homework: 
+Finalize your data set
+If you change your data set have a new proposal
+Have some of your data loaded via Javascript printed via console-->
+<h2>please go to console to see all the baby names of 1993  </h2> 
+
+<svg width="720" height="120">
+
+</svg>
+
+<script>
+	
+	// d3.txt(file, function(data,error){});
+	d3.csv("data/1993.csv", function(error, data){
+		//console.log(error, data);
+
+		if(error){
+			console.log(error.status, error.statusText);
+		}
+		else {
+			
+			console.log(data);
+		}
+	});
+
+
+	
+
+//-----------------------------------------------------------
+
+
+	// d3.text("data/yob1993.txt", function(error, data){
+
+
+
+	// 	if(error){
+	// 		console.log(error.status, error.statusText);
+	// 	}
+	// 	else {
+	// 		console.log(data);
+	// 		data.forEach(function(dataPoint){
+	// 			dataPoint.x = parseFloat(dataPoint.x);
+	// 			dataPoint.size = parseFloat(dataPoint.size);
+	// 			console.log(dataPoint);
+	// 		});
+	// 		draw(data);
+	// 	}
+	// });
+
+// ----------------------------------------------------------------
+
+	// function draw(data){
+	// 	//selecting unique variables based on size
+	// 	var circle = d3.select("svg").selectAll("rect")
+	// 		.data(data, function(d){
+	// 			return d.size;
+	// 		});
+
+	// 	circle.enter().append("rect")
+	// 		.attr("y", 60)
+	// 		.style("fill", function(d){
+	// 			return d.color;
+
+	// 		})
+	// 		.attr("width",0)
+	// 		.attr("height",0);
+
+	// 	circle.transition().duration(1000)
+	// 		.attr("width", function(dataPoint){
+	// 			return dataPoint.size;
+	// 		})
+	// 		.attr("height", function(dataPoint){
+	// 			return dataPoint.size;
+	// 		})
+	// 		.style("fill", function(d){
+	// 			return d.color;
+	// 		})
+	// 		.attr("x", function (d){
+	// 			return d.x;
+	// 		});
+
+	// 	circle.exit().transition().duration(1000)
+	// 	.attr("r", 0).remove();
+	// }
+
+
+</script>
