@@ -1,0 +1,110 @@
+---
+layout: default
+title: in class 10/20
+---
+
+<svg width=1000 height=200></svg>
+<button>BOYS ONLY</button>
+
+<script>
+
+	var names; //declared outside a function, exists everywhere
+
+	d3.csv("data/1993.csv", function(error, data){
+		console.log(data[0]);
+		console.log(data.length);
+		data.forEach(function(d){
+			d.total = parseFloat(d.total); //makes strings into a number
+		});
+
+		names = data.sort(function(a, b){
+			return b.total - a.total;
+		});
+
+		// menSlice = men.slice(0,10);
+
+		// console.log(filteredData.length);
+		// console.log(men.length);
+		// console.log(menSort[0]);
+		// console.log(menSlice.length);
+
+		draw(names.slice(0,10));
+
+	});
+
+	function draw(nameData){
+		console.log(nameData);
+
+		var circles = d3.select("svg").selectAll("circle")
+			.data(nameData, function(d){
+				return d.name;
+			});
+
+		circles.enter().append("circle")
+			.attr("cy", 100)
+			.attr("cx", function(d, i){ //i >> index >> where you are in the array
+				return 50 * (i + 1);
+			})
+			.attr("r", 10);
+
+		
+
+		var extent = d3.extent(nameData, function(d){
+			return d.total;
+		});
+
+		var scale = d3.scale.linear()
+		.domain(extent)
+		.range([2, 25]);
+
+		// circles.transition().duration(500)
+		// .attr("r", 25);
+
+		circles.transition().duration(500)
+		.attr("r", function(d){
+			return scale(d.total);
+		})
+		.attr("fill", function(d){
+			// if (d.gender == "M"){
+			// 	return "cornflowerblue";
+			// }
+			// else {
+			// 	return "pink";
+			// }
+			return 	d.gender == "M" ? "cornflowerblue" : "pink";
+		})
+		.attr("cx", function(d, i){
+			return 50 * (i + 1);
+		});
+
+		// circles.transition().duration(500)
+		// .attr("r", function(d){
+		// 	return d.total;
+		// });
+		
+		circles.on("click", function(d){
+			console.log(d.name);
+		});
+
+		circles.exit().transition().duration(500)
+		.attr("r", 0).remove();
+
+
+	}
+	
+	d3.select("button").on("click", function(){
+		// variable boysData is declared inside the function and therefore only exists in this function
+		var boysData = names.filter(function(d){
+			return d.gender == "M";
+		}).slice(0,10);
+		draw(boysData);
+	});
+
+	//year slider filters the data
+	// your draw function will change the look of the new data 
+
+	//homework: 
+	//prepare mockups of how you might visualize your data. Come up with at least 3 different ways to encode your data in illustrator. 
+
+
+</script>

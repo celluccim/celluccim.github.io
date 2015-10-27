@@ -1,0 +1,19 @@
+in class 10/20
+
+make data a variable
+ex
+var dataArray;
+dataArray = data;
+
+dataArray.slice(0,10) >> gets all items in array from 0 to 10
+
+dataArray.slice(0,10).map(fucntion(d){return d.Element});
+
+
+Data Visualization
+
+4 main attributes
+size: radius, width/height, arc radius, line/stroke width
+color
+shape
+position: maps-longitude and latitude 
