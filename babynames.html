@@ -1,0 +1,225 @@
+---
+layout: default
+title: Baby Names 
+---
+<style>
+	#controls {
+		background-color: grey;
+		display: block;
+		position: absolute;
+		top:0;
+		bottom:0;
+		width:200px;
+	}
+
+	svg {
+		background-color: green;
+		margin-left: 225px;
+	}
+
+	#name_dropdown {
+		position: absolute;
+		top:10px;
+		left:10px;
+	}
+</style>
+
+<div id="controls">
+	<!-- drop down menu
+ --><select id="name_dropdown">
+	</select>
+</div>
+
+
+<svg width="1000" height="500"></svg>
+
+
+
+
+
+<!--javascript-->
+<script type="text/javascript">
+
+	var raw_data = [];
+	var mNames = [];
+
+
+	d3.csv("data/yob1993.csv", function(error, data){
+		data.forEach(function(d){
+			d.total = parseFloat(d.total); //makes strings into a number
+		});
+
+		console.log(data[0]);
+
+		//all the males
+		raw_data = data.filter(function(d){
+			return d.gender === "M";
+		});
+
+		console.log(raw_data[0].name);
+
+		//the top 100 names
+		var mPopular = raw_data.slice(0,10);
+	
+
+		mPopular.forEach(function(d){
+
+			if (mNames.indexOf(d.name) == -1) {
+				mNames.push(d.name);
+			}
+		});
+
+		console.log(mPopular); 
+		console.log(mPopular[0].total);
+		console.log(mPopular[2].name);
+		console.log(mNames[0]);
+
+
+
+
+		// mPopular.forEach(function(d){
+		// 	if (mNames.indexOf(d.name) == -1) {
+		// 		mNames.push(d.name);
+		// 	}
+		// });
+
+		mNames.sort();
+		// name = mNames[0];
+
+		//added all the years that SWE was in the Olympics to the dropdown
+		var options = d3.select("#name_dropdown").selectAll("option")
+			.data(mNames).enter().append("option")
+			.attr("value", function(d){
+				return d;
+			})
+			.text(function(d){
+				return d;
+			});
+
+		//changing the circle based on the year value selected from the dropdown
+		// d3.select("#year_dropdown").on("change", function(){
+		// 	year = years[this.selectedIndex];
+		// 	draw();
+
+		// });
+
+		draw(mPopular);
+
+		console.log(raw_data);
+
+	});
+
+function draw(nameData){
+
+		var circles = d3.select("svg").selectAll("circle")
+			.data(nameData, function(d){
+				return d.name;
+			});
+			
+		//spacing out the circles initially in a row
+		circles.enter().append("circle")
+			.attr("cy", 100)
+			.attr("cx", function(d, i){ //i >> index >> where you are in the array
+				return 50 * (i + 1);
+			})
+			.attr("r", 10);
+
+		
+
+		var extent = d3.extent(nameData, function(d){
+			return d.total;
+		});
+
+
+
+	// 		var circle = d3.select("svg").selectAll("circle")
+	// 			.data([total_data.length]); //this number is driving the size of the circle
+
+		var scale = d3.scale.linear()
+		.domain(extent)
+		.range([2, 25]);
+
+		// circles.transition().duration(500)
+		// .attr("r", 25);
+
+		circles.transition().duration(500)
+		.attr("r", function(d){
+			return scale(d.total);
+		})
+		.attr("fill", function(d){
+			// if (d.gender == "M"){
+			// 	return "cornflowerblue";
+			// }
+			// else {
+			// 	return "pink";
+			// }
+			return 	d.gender == "M" ? "cornflowerblue" : "pink";
+		})
+		.attr("cx", function(d, i){
+			return 50 * (i + 1);
+		});
+
+		// circles.transition().duration(500)
+		// .attr("r", function(d){
+		// 	return d.total;
+		// });
+		
+		circles.on("mouseover", function(d){
+			d3.select(this).attr("fill", "red");
+		});
+
+		circles.on("mouseout", function(d){
+			d3.select(this).attr("fill", "cornflowerblue");
+		});
+
+		circles.exit().transition().duration(500)
+		.attr("r", 0).remove();
+
+
+	}
+
+
+	// function draw(){
+	// 	var total_data = raw_data.filter(function(d){
+	// 		return d.total === total;
+	// 	});
+
+	// 	var scale = d3.scale.linear()
+	// 		.domain([0,50000]) //data we're working with
+	// 		.range([20,500]); //radius width, scaling down the data
+
+	// 		var circle = d3.select("svg").selectAll("circle")
+	// 			.data([total_data.length]); //this number is driving the size of the circle
+
+	// 			circle.enter().append("circle")
+	// 				.attr("r", 0)
+	// 				.attr("cx", 250)
+	// 				.attr("cy", 250);
+
+	// 			circle.transition().duration(500)
+	// 				.attr("r", function(d){
+	// 					return scale(d);
+	// 				});
+
+	// 			circle.on("mouseover", function(){
+	// 				d3.select(this).attr("fill", "pink");
+	// 			})
+	// 			.on("mouseout", function(d){
+	// 				d3.select(this).attr("fill", "black");
+	// 			})
+	// 			.on("click", function(d){
+	// 				d3.select(this).attr("fill", "red");
+	// 			});
+
+
+
+
+
+
+	// 	console.log(total_data);
+	// }
+
+</script>
+
+
+

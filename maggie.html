@@ -13,6 +13,7 @@ title: in class 10/20
 	d3.csv("data/1993.csv", function(error, data){
 		console.log(data[0]);
 		console.log(data.length);
+		
 		data.forEach(function(d){
 			d.total = parseFloat(d.total); //makes strings into a number
 		});
