@@ -9,25 +9,73 @@ title: Baby Names
 		position: absolute;
 		top:0;
 		bottom:0;
+		left: 0;
 		width:200px;
 	}
 
 	svg {
-		background-color: green;
 		margin-left: 225px;
 	}
 
 	#name_dropdown {
 		position: absolute;
-		top:10px;
-		left:10px;
+		top:30px;
+		margin-left:30px;
 	}
+
+	#year_dropdown {
+		position: absolute;
+		top:55px;
+		margin-left:30px;
+	}
+
+	#year_slider {
+		position: absolute;
+		top: 90px;
+		margin-left: 30px;
+	}
+
+	input.vertical {
+		-webkit-appearance: slider-vertical;
+		writing-mode: bt-lr;
+		width: 10px;
+		height: 300px;
+		margin-top: 10px;
+	}
+
+	#year {
+		font-family: 'Helvetica Neue', Helvetica, sans-serif;
+		font-weight: bold;
+		font-size: 24px;
+	}
+
+
+
+
+
 </style>
 
+
+<!--Sidebar/////////////////////////////////////////-->
 <div id="controls">
-	<!-- drop down menu
- --><select id="name_dropdown">
+	<!-- name drop down menu-->
+	<select id="name_dropdown">
 	</select>
+
+	<!-- year drop down menu-->
+	<select id="year_dropdown">
+	</select>
+	<div id="year_slider">
+		<!--the name of the slider-->
+		<label for="fader">Year</label>
+		<br>
+		<!--the output based on where the slider is-->
+		<output for="fader" id="year">2014</output>	
+		<br>
+		<!--input, the button of the slider-->
+		<input type="range" min="1880" max="2014" value="2014" id="fader" step="1" oninput="outputUpdate(value)" class="vertical" orient="vertical">
+		
+	</div>
 </div>
 
 
@@ -37,77 +85,153 @@ title: Baby Names
 
 
 
-<!--javascript-->
+<!--javascript/////////////////////////////////////////-->
 <script type="text/javascript">
+
+	function outputUpdate(year) {
+		document.querySelector('#year').value = year;
+	}
 
 	var raw_data = [];
 	var mNames = [];
+	var minYear = 1880, maxYear = 2014;
+	var years = d3.range(minYear, maxYear + 1);
 
-
-	d3.csv("data/yob1993.csv", function(error, data){
-		data.forEach(function(d){
-			d.total = parseFloat(d.total); //makes strings into a number
-		});
-
-		console.log(data[0]);
-
-		//all the males
-		raw_data = data.filter(function(d){
-			return d.gender === "M";
-		});
-
-		console.log(raw_data[0].name);
-
-		//the top 100 names
-		var mPopular = raw_data.slice(0,10);
-	
-
-		mPopular.forEach(function(d){
-
-			if (mNames.indexOf(d.name) == -1) {
-				mNames.push(d.name);
-			}
-		});
-
-		console.log(mPopular); 
-		console.log(mPopular[0].total);
-		console.log(mPopular[2].name);
-		console.log(mNames[0]);
-
-
-
-
-		// mPopular.forEach(function(d){
-		// 	if (mNames.indexOf(d.name) == -1) {
-		// 		mNames.push(d.name);
-		// 	}
-		// });
-
-		mNames.sort();
-		// name = mNames[0];
-
-		//added all the years that SWE was in the Olympics to the dropdown
-		var options = d3.select("#name_dropdown").selectAll("option")
-			.data(mNames).enter().append("option")
-			.attr("value", function(d){
-				return d;
-			})
+	//year dropdown, adding the years to it
+	var options = d3.select("#year_dropdown").selectAll("option")
+			.data(years).enter().append("option")
 			.text(function(d){
 				return d;
 			});
+			
 
-		//changing the circle based on the year value selected from the dropdown
-		// d3.select("#year_dropdown").on("change", function(){
-		// 	year = years[this.selectedIndex];
-		// 	draw();
 
-		// });
 
-		draw(mPopular);
+		//
+		d3.select("#year_dropdown").on("change", function(){
+			year = years[this.selectedIndex];
 
-		console.log(raw_data);
+			d3.csv("data/yob" + year + ".csv", function(error, data){
+			data.forEach(function(d){
+				d.total = parseFloat(d.total); //makes strings into a number
+			});
+
+
+			//all the males
+			raw_data = data.filter(function(d){
+				return d.gender === "M";
+			});
+
+
+			//the top 10 names
+			var mPopular = raw_data.slice(0,10);
+
+			//clears mNames before adding names to it
+			mNames = [];
+			mPopular.forEach(function(d){
+
+				if (mNames.indexOf(d.name) == -1) {
+					mNames.push(d.name);
+				}
+			});
+
+
+			mNames.sort();
+
+			console.log(mNames);
+
+			//added all the name of selected year from year dropdown
+			var options = d3.select("#name_dropdown").selectAll("option")
+				.data(mNames, function(d){
+					return d;
+				});
+
+			options.enter().append("option")
+				.attr("value", function(d){
+					return d;
+				})
+				.text(function(d){
+					return d;
+				});
+
+			options.exit().remove();
+
+			draw(mPopular);
+
+
+
+		});
 
 	});
+
+	console.log(years);
+
+		
+	
+
+	// d3.csv("data/yob1993.csv", function(error, data){
+	// 	data.forEach(function(d){
+	// 		d.total = parseFloat(d.total); //makes strings into a number
+	// 	});
+
+
+	// 	//all the males
+	// 	raw_data = data.filter(function(d){
+	// 		return d.gender === "M";
+	// 	});
+
+	// 	// console.log(raw_data[0].name);
+
+	// 	//the top 10 names
+	// 	var mPopular = raw_data.slice(0,10);
+	
+
+	// 	mPopular.forEach(function(d){
+
+	// 		if (mNames.indexOf(d.name) == -1) {
+	// 			mNames.push(d.name);
+	// 		}
+	// 	});
+
+	// 	// console.log(mPopular); 
+	// 	// console.log(mPopular[0].total);
+	// 	// console.log(mPopular[2].name);
+	// 	// console.log(mNames[0]);
+
+
+
+
+	// 	// mPopular.forEach(function(d){
+	// 	// 	if (mNames.indexOf(d.name) == -1) {
+	// 	// 		mNames.push(d.name);
+	// 	// 	}
+	// 	// });
+
+	// 	mNames.sort();
+	// 	// name = mNames[0];
+
+	// 	//added all the years that SWE was in the Olympics to the dropdown
+	// 	var options = d3.select("#name_dropdown").selectAll("option")
+	// 		.data(mNames).enter().append("option")
+	// 		.attr("value", function(d){
+	// 			return d;
+	// 		})
+	// 		.text(function(d){
+	// 			return d;
+	// 		});
+
+	// 	//changing the circle based on the year value selected from the dropdown
+	// 	// d3.select("#year_dropdown").on("change", function(){
+	// 	// 	year = years[this.selectedIndex];
+	// 	// 	draw();
+
+	// 	// });
+
+	// 	draw(mPopular);
+
+		
+
+	// });
 
 function draw(nameData){
 
@@ -147,29 +271,22 @@ function draw(nameData){
 			return scale(d.total);
 		})
 		.attr("fill", function(d){
-			// if (d.gender == "M"){
-			// 	return "cornflowerblue";
-			// }
-			// else {
-			// 	return "pink";
-			// }
 			return 	d.gender == "M" ? "cornflowerblue" : "pink";
 		})
 		.attr("cx", function(d, i){
 			return 50 * (i + 1);
 		});
-
-		// circles.transition().duration(500)
-		// .attr("r", function(d){
-		// 	return d.total;
-		// });
 		
 		circles.on("mouseover", function(d){
-			d3.select(this).attr("fill", "red");
+			d3.select(this).attr("fill", "black");
 		});
 
 		circles.on("mouseout", function(d){
 			d3.select(this).attr("fill", "cornflowerblue");
+		});
+
+		circles.on("click", function(d){
+			console.log(d.name + " " + d.total);
 		});
 
 		circles.exit().transition().duration(500)
@@ -179,45 +296,7 @@ function draw(nameData){
 	}
 
 
-	// function draw(){
-	// 	var total_data = raw_data.filter(function(d){
-	// 		return d.total === total;
-	// 	});
 
-	// 	var scale = d3.scale.linear()
-	// 		.domain([0,50000]) //data we're working with
-	// 		.range([20,500]); //radius width, scaling down the data
-
-	// 		var circle = d3.select("svg").selectAll("circle")
-	// 			.data([total_data.length]); //this number is driving the size of the circle
-
-	// 			circle.enter().append("circle")
-	// 				.attr("r", 0)
-	// 				.attr("cx", 250)
-	// 				.attr("cy", 250);
-
-	// 			circle.transition().duration(500)
-	// 				.attr("r", function(d){
-	// 					return scale(d);
-	// 				});
-
-	// 			circle.on("mouseover", function(){
-	// 				d3.select(this).attr("fill", "pink");
-	// 			})
-	// 			.on("mouseout", function(d){
-	// 				d3.select(this).attr("fill", "black");
-	// 			})
-	// 			.on("click", function(d){
-	// 				d3.select(this).attr("fill", "red");
-	// 			});
-
-
-
-
-
-
-	// 	console.log(total_data);
-	// }
 
 </script>
 
