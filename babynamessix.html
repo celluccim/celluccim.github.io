@@ -1,0 +1,284 @@
+---
+layout: default
+title: Baby Names 6
+---
+<style>
+	#controls {
+		background-color: grey;
+		display: block;
+		position: absolute;
+		top:0;
+		bottom:0;
+		left: 0;
+		width:200px;
+	}
+
+	svg {
+		margin-left: 225px;
+	}
+
+	#name_dropdown {
+		position: absolute;
+		top:30px;
+		margin-left:30px;
+	}
+
+	#year_dropdown {
+		position: absolute;
+		top:55px;
+		margin-left:30px;
+	}
+
+	#year_slider {
+		position: absolute;
+		top: 90px;
+		margin-left: 30px;
+	}
+
+	input.vertical {
+		-webkit-appearance: slider-vertical;
+		writing-mode: bt-lr;
+		width: 10px;
+		height: 300px;
+		margin-top: 10px;
+	}
+
+	#year {
+		font-family: 'Helvetica Neue', Helvetica, sans-serif;
+		font-weight: bold;
+		font-size: 24px;
+	}
+
+
+
+
+
+</style>
+
+
+<!--Sidebar/////////////////////////////////////////-->
+<div id="controls">
+	<!-- gender drop down menu-->
+	<select id="gender_dropdown">
+	</select>
+	<div id="year_slider">
+		<!--the name of the slider-->
+		<label for="fader">Year</label>
+		<br>
+		<!--the output based on where the slider is-->
+		<output for="fader" id="year">2014</output>	
+		<br>
+		<!--input, the button of the slider-->
+		<input type="range" min="1880" max="2014" value="2014" id="inputYear" step="1" oninput="outputUpdate(value)" class="vertical" orient="vertical">
+		
+	</div>
+</div>
+
+
+<svg width="1000" height="600"></svg>
+
+
+
+
+
+<!--javascript/////////////////////////////////////////-->
+<script type="text/javascript">
+
+	function outputUpdate(year) {
+		document.querySelector('#year').value = year;
+	}
+
+	//gender dropdown
+	var genders = ["All","M", "F"];
+	var options = d3.select("#gender_dropdown").selectAll("option")
+			.data(genders).enter().append("option")
+			.text(function(d){
+				return d;
+			});
+
+	var raw_data = [];
+	var minYear = 1880, maxYear = 2014;
+	var years = d3.range(minYear, maxYear + 1);
+	var mNames = [];
+	// var margaret;
+			
+// when the input range changes update the circle 
+	d3.select("#inputYear").on("input", function() {
+		var year = d3.select("#year").text();
+	
+		//inside d3 slider year selecter, selecting the YOB file based on the year slider
+		d3.csv("data/yob" + year + ".csv", function(error, data){
+			//turning "total" into numbers
+			data.forEach(function(d){
+				d.total = parseFloat(d.total);
+			});
+
+			//only the name maggie
+			maggie = data.filter(function(d){
+				return d.name === "Maggie";
+			});
+
+			//only the name margaret
+			margaret = data.filter(function(d){
+				return d.name === "Margaret";
+			});
+
+			//only male Alexander
+			var alexander = data.filter(function(d){
+				return d.name === "Alexander" && d.gender == "M";
+			});
+
+			//only males
+			raw_data = data.filter(function(d){
+				return d.gender == "M";
+			});
+
+			var mPopular = raw_data.slice(0,10);
+
+			mNames = [];
+			mPopular.forEach(function(d){
+
+				if (mNames.indexOf(d.name) == -1) {
+					mNames.push(d.name);
+				}
+			});
+
+			mNames.sort();
+			draw(margaret);
+		});
+
+	});
+
+
+	// d3.select("#year_dropdown").on("change", function(){
+	// 	year = years[this.selectedIndex];
+
+	// 	d3.csv("data/yob" + year + ".csv", function(error, data){
+	// 		data.forEach(function(d){
+	// 			d.total = parseFloat(d.total); //makes strings into a number
+	// 		});
+
+
+	// 		//all the males
+	// 		raw_data = data.filter(function(d){
+	// 			return d.gender === "M";
+	// 		});
+
+
+	// 		//the top 10 names
+	// 		var mPopular = raw_data.slice(0,10);
+
+	// 		//clears mNames before adding names to it
+	// 		mNames = [];
+	// 		mPopular.forEach(function(d){
+
+	// 			if (mNames.indexOf(d.name) == -1) {
+	// 				mNames.push(d.name);
+	// 			}
+	// 		});
+
+
+	// 		mNames.sort();
+
+	// 		// console.log(mNames);
+
+	// 		//added all the name of selected year from year dropdown
+	// 		var options = d3.select("#name_dropdown").selectAll("option")
+	// 			.data(mNames, function(d){
+	// 				return d;
+	// 			});
+
+	// 		options.enter().append("option")
+	// 			.attr("value", function(d){
+	// 				return d;
+	// 			})
+	// 			.text(function(d){
+	// 				return d;
+	// 			});
+
+	// 		options.exit().remove();
+
+	// 		draw(mPopular);
+
+
+
+	// 	});
+
+	// });
+
+
+function draw(nameData){
+
+		var circles = d3.select("svg").selectAll("circle")
+			.data(nameData, function(d){
+				return d.name;
+			});
+
+		//spacing out the circles initially in a row
+		circles.enter().append("circle")
+			.attr("cy", 300)
+			// .attr("cx", function(d, i){ //i >> index >> where you are in the array
+			// 	return 50 * (i + 1);
+			// })
+			.attr("cx", 500)
+			.attr("r", 10);
+
+		
+
+		// var extent = d3.extent(nameData, function(d){
+		// 	return d.total;
+		// });
+
+
+
+	// 		var circle = d3.select("svg").selectAll("circle")
+	// 			.data([total_data.length]); //this number is driving the size of the circle
+
+		var scale = d3.scale.linear()
+		// .domain(extent)
+		.domain([0,50000])
+		.range([2, 300]);
+
+		// circles.transition().duration(500)
+		// .attr("r", 25);
+
+		circles.transition().duration(100)
+			.attr("r", function(d){
+				return scale(d.total);
+				console.log(d.total);
+			})
+			.attr("fill", function(d){
+				return 	d.gender == "M" ? "cornflowerblue" : "pink";
+			});
+			// .attr("cx", function(d, i){
+			// 	return 50 * (i + 1);
+			// });
+		
+		
+		circles.on("mouseover", function(d){
+			d3.select(this).attr("fill", "black");
+		});
+
+		circles.on("mouseout", function(d){
+			d3.select(this).attr("fill", function(d){
+				return 	d.gender == "M" ? "cornflowerblue" : "pink";
+			});
+		});
+
+		circles.on("click", function(d){
+			console.log(d.name + " " + d.total);
+		});
+
+		circles.exit().transition().duration(100)
+		.attr("r", 0).remove();
+
+
+	}
+
+
+
+
+</script>
+
+
+

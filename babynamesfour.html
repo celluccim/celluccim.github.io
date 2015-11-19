@@ -1,59 +1,9 @@
 ---
 layout: default
-title: Baby Names (3)
+title: Baby Names (4)
 ---
 
-<style>
-	#controls {
-		background-color: grey;
-		display: block;
-		position: absolute;
-		top:0;
-		bottom:0;
-		left: 0;
-		width:200px;
-	}
-
-	svg {
-		margin-left: 225px;
-	}
-
-	#name_dropdown {
-		position: absolute;
-		top:30px;
-		margin-left:30px;
-	}
-
-	#year_dropdown {
-		position: absolute;
-		top:55px;
-		margin-left:30px;
-	}
-
-	#year_slider {
-		position: absolute;
-		top: 90px;
-		margin-left: 30px;
-	}
-
-	input.vertical {
-		-webkit-appearance: slider-vertical;
-		writing-mode: bt-lr;
-		width: 10px;
-		height: 300px;
-		margin-top: 10px;
-	}
-
-	#inputYear-value {
-		font-family: 'Helvetica Neue', Helvetica, sans-serif;
-		font-weight: bold;
-		font-size: 24px;
-	}
-
-</style>
-
-
-
+<!--HTML/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
 <div id="controls">
 	<div id="year_slider">
 	  <label for="inputYear">
@@ -68,46 +18,25 @@ title: Baby Names (3)
 
 
 
+<svg width="1000" height="600"></svg>
+
 
 
 <!--javascript///////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
 <script type="text/javascript">
-//----SLIDER------------------------------------------------------------------
-	var width = 1000;
-	var height = 600;
+	
 	var maggie = [];
 	var margaret = [];
-
-	
-	//svg box 
-	var holder = d3.select("body")
-	      .append("svg")
-	      .attr("width", width)    
-	      .attr("height", height); 
-
-	
+	var minYear = 1880, maxYear = 2014;
+	var years = d3.range(minYear, maxYear + 1);
 
 
 	// when the input range changes update the circle 
 	d3.select("#inputYear").on("input", function() {
-
-		var minYear = 1880, maxYear = 2014;
-		var years = d3.range(minYear, maxYear + 1);
 		var year = d3.select("#inputYear-value").text();
 	
-
-
 		//inside d3 slider year selecter, selecting the YOB file based on the year slider
 		d3.csv("data/yob" + year + ".csv", function(error, data){
-
-			// draw the circle
-			holder.append("circle")
-			  .attr("cx", 500)
-			  .attr("cy", 300) 
-			  .style("fill", "pink")  //function(d){if {d.gender == "M" return blue;} else { return pink; }} 
-			  .style("stroke", "none") 
-			  .attr("r", 0);
-
 			//turning "total" into numbers
 			data.forEach(function(d){
 				d.total = parseFloat(d.total);
@@ -124,31 +53,46 @@ title: Baby Names (3)
 			});
 		});
 
-	  update(+this.value);
+	  draw(margaret);
 	});
 
 	// Initial starting radius of the circle 
-	update(2014);
+	// update(2014);
 
 	// update the elements DRAW
-	function update(inputYear) {
+	function draw(nameData) {
+		var circles = d3.select("svg").selectAll("circles")
+			.data(nameData, function(d){
+				return d.name;
+			});
+		circles.enter().append("cricle")
+			.attr("cx", 500)
+			.attr("cy", 300)
+			.attr("r", 0);
+
+		var extent = d3.extent(nameData, function(d){
+			return d.total;
+		});
+
 		//radius width, scaling down the data
 		var scale = d3.scale.linear()
-			.domain([0,50000]) //data we're working with
+			.domain(extent) //data we're working with
 			.range([0,300]);
+
+		circles.transition().duration(500)
+			.attr("r", function(d){
+				return scale(d.total);
+			})
+			.attr("fill", function(d){
+				return 	d.gender == "M" ? "cornflowerblue" : "pink";
+			});
 
 	  	// adjust the text on the range slider
 	 	d3.select("#inputYear-value").text(inputYear);
 	 	d3.select("#inputYear").property("value", inputYear);
 
-
-	  	// update the circle radius
-	  	holder.selectAll("circle")
-		    .attr("r", function(d){
-		    	return scale(margaret[0].total);
-		    });
-
-
+	 	circles.exit().transition().duration(500)
+	 		.attr("r", 0).remove();
 
 	}
 

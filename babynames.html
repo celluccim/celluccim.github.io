@@ -103,15 +103,14 @@ title: Baby Names
 			.text(function(d){
 				return d;
 			});
-			
 
 
 
-		//
-		d3.select("#year_dropdown").on("change", function(){
-			year = years[this.selectedIndex];
+	//
+	d3.select("#year_dropdown").on("change", function(){
+		year = years[this.selectedIndex];
 
-			d3.csv("data/yob" + year + ".csv", function(error, data){
+		d3.csv("data/yob" + year + ".csv", function(error, data){
 			data.forEach(function(d){
 				d.total = parseFloat(d.total); //makes strings into a number
 			});
@@ -138,7 +137,7 @@ title: Baby Names
 
 			mNames.sort();
 
-			console.log(mNames);
+			// console.log(mNames);
 
 			//added all the name of selected year from year dropdown
 			var options = d3.select("#name_dropdown").selectAll("option")
@@ -156,6 +155,7 @@ title: Baby Names
 
 			options.exit().remove();
 
+			
 			draw(mPopular);
 
 
@@ -164,7 +164,7 @@ title: Baby Names
 
 	});
 
-	console.log(years);
+	// console.log(years);
 
 		
 	
@@ -239,7 +239,7 @@ function draw(nameData){
 			.data(nameData, function(d){
 				return d.name;
 			});
-			
+		console.log(circles);
 		//spacing out the circles initially in a row
 		circles.enter().append("circle")
 			.attr("cy", 100)
@@ -276,6 +276,7 @@ function draw(nameData){
 		.attr("cx", function(d, i){
 			return 50 * (i + 1);
 		});
+		
 		
 		circles.on("mouseover", function(d){
 			d3.select(this).attr("fill", "black");
