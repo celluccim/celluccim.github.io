@@ -32,7 +32,7 @@ p#redParagraph {
 
 //Baby Names CSS ///////////////////////////////////////////////////////////////////////////////////////////////
 #controls {
-	background-color: #858A8F;
+	background-color: #F7F4DC;
 	display: block;
 	position: absolute;
 	top:0;
@@ -41,10 +41,18 @@ p#redParagraph {
 	width:200px;
 }
 
+body {
+		background-color: #F7F4DC;
+
+}
+
 svg {
 	width: 1215px;
-	height: 740px;
+	height: 750px;
 	margin-left: 205px;
+	background-color: #F7F4DC;
+
+
 }
 
 #gender_dropdown {
@@ -59,10 +67,12 @@ input.genderButton[type=text] {
     border:2px solid #ccc; 
     -webkit-border-radius: 0px;
     border-radius: 0px;
+    font-family: 'Doppio One', sans-serif;
 }
 
 input.genderButton[type=text]:focus {
     border-color:#333;
+    font-family: 'Doppio One', sans-serif;
 }
 
 input.genderButton[type=submit] {
@@ -70,22 +80,30 @@ input.genderButton[type=submit] {
     border:0 none;
     cursor:pointer;
     height: 30px;
+    font-family: 'Doppio One', sans-serif;
 }
 
-input.genderButton[value="FEMALE"]{
+input.genderButton[value="GIRLS"]{
 	background-color: pink;
+	font-family: 'Doppio One', sans-serif;
 }
-input.genderButton[value="MALE"]{
+input.genderButton[value="BOYS"]{
 	background-color: cornflowerblue;
+	font-family: 'Doppio One', sans-serif;
 }
 input.genderButton[value="ALL"]{
-	background-color: #f2f2f2;
+	background-color: #f1e974;
+	font-family: 'Doppio One', sans-serif;
+}
+
+input.nameTextBox[type=text]{
+	font-family: 'Doppio One', sans-serif;
 }
 
 #genderButtons {
 	position: absolute;
-	top: 20px;
-	margin-left: 25px;
+	top: 100px;
+	margin-left: 30px;
 }
 
 .genderButton:hover {
@@ -100,7 +118,7 @@ input.genderButton[value="ALL"]{
 
 #year_slider {
 	position: absolute;
-	top: 90px;
+	top: 170px;
 	margin-left: 30px;
 }
 
@@ -113,15 +131,73 @@ input.vertical {
 }
 
 #yearLabel {
-	font-family: 'Helvetica Neue', Helvetica, sans-serif;
-	font-weight: medium;
+font-family: 'Doppio One', sans-serif;	font-weight: medium;
 	font-size: 13px;
 }
 
 
 #year {
-		font-family: 'Helvetica Neue', Helvetica, sans-serif;
-		font-weight: bold;
-		font-size: 54px;
+font-family: 'Doppio One', sans-serif;	font-weight: bold;
+	font-size: 58px;
 	}
+
+#nameTextBox {
+	position: absolute;
+	top: 45px;
+	margin-left: 30px;
+}
+
+.modalDialog {
+	position: absolute;
+	font-family: 'Doppio One', sans-serif;	// width: 150px;
+	// height: 70px;
+	background: #EDEFF0;
+	z-index: 99999;
+	-webkit-transition: opacity 400ms ease-in;
+	-moz-transition: opacity 400ms ease-in;
+	transition: opacity 400ms ease-in;
+	opacity: 0;
+	pointer-events: none;
+	padding: 15px;
+	text-align: left;
+	box-shadow: 2px 2px 5px #666;
+}
+
+.modalDialog.open {
+	opacity: 0.85;
+
+}
+
+.close {
+	// background: #606061;
+	color: #999;
+	line-height: 25px;
+	position: absolute;
+	right: 12px;
+	text-align: center;
+	top: 12px;
+	width: 24px;
+	text-decoration: none;
+	font-weight: bold;
+
+
+}
+
+
+.modalDialog h2 {
+	color: #4E4E4E;
+	font-size: 24px;
+	margin-bottom: 0px;
+	margin-top: 0px;
+	font-family: 'Doppio One', sans-serif;
+
+}
+
+.modalDialog h3 {
+	color: #4E4E4E;
+	font-size: 12px;
+	margin-top: 6px;
+	margin-bottom: 0px;
+	font-family: 'Doppio One', sans-serif;
+}
 
