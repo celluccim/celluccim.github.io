@@ -201,3 +201,15 @@ font-family: 'Doppio One', sans-serif;	font-weight: bold;
 	font-family: 'Doppio One', sans-serif;
 }
 
+#middleChild {
+	font-family: 'Doppio One', sans-serif;
+	position: absolute;
+	top: 23px;
+	left: 220px;
+	opacity: 0;
+}
+
+#middleChild.visible {
+	opacity: 1;
+}
+

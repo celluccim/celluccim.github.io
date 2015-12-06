@@ -39,6 +39,10 @@ title: Baby Names 5
 
 </div>
 
+<div id="middleChild" class="middleChild">
+	<h2>You're parents didn't <br> love you.</h2>
+</div>
+
 
 <svg></svg>
 
@@ -48,14 +52,21 @@ title: Baby Names 5
 
 <!--javascript/////////////////////////////////////////-->
 <script type="text/javascript">
-	// d3.select(".close").on("click", function(d){
-	// 	d3.select("#openModal").classed("open", false);
-	// });
+
 
 	function outputUpdate(year) {
 		document.querySelector('#year').value = year;
 	}
 
+	// function middleChildSyndrome(nameData) {
+	// 	var middleChild = nameData.filter(function(d){
+ //    		return currentSearch.length || d.name.toLowerCase().indexOf(currentSearch) === 0;
+	// 		}).length === 0;
+
+	// 	d3.select("#middleChild").classed("visible", );
+	// }
+
+	d3.select("#middleChild").classed("visible", false);
 
 	var mData = [];
 	var fData = [];
@@ -99,17 +110,7 @@ title: Baby Names 5
 
 			mData = mData.slice(0, 500);
 
-			var mPopular = mData.slice(0,10);
-
-			mNames = [];
-			mPopular.forEach(function(d){
-
-				if (mNames.indexOf(d.name) == -1) {
-					mNames.push(d.name);
-				}
-			});
-
-			mNames.sort();
+			
 			var aData = mData.concat(fData);
 			fullData[year] = {
 			    "BOYS": mData,
@@ -121,8 +122,10 @@ title: Baby Names 5
 			currentYear = year;
 
 			draw();
-		});
+			
 
+			});
+			
 	});
 
 
@@ -142,7 +145,7 @@ function draw(nameData){
 	    nameData = bubble({"children": nameData}); //what we're drawing >> name data
 	    nameData.shift(); //shifting the array down one (eliminating "parent")
 
-
+	  
 	    //creating the circles that we're drawing
 		var circles = d3.select("svg").selectAll("circle")
 			.data(nameData, function(d){
@@ -162,6 +165,8 @@ function draw(nameData){
 
 			.attr("r", 0);
 
+
+		
 		
 
 		circles.transition().duration(100)
@@ -179,20 +184,20 @@ function draw(nameData){
 			})
 			.attr("fill", function(d){
 				return currentSearch.length && d.name.toLowerCase().indexOf(currentSearch) === 0 ? (d.gender == "M" ? "#01366B" : "#FA25A1") : (d.gender == "M" ? "cornflowerblue" : "pink");
-			})
-			// .attr("fill", function(d){
-			// 	return currentSearch.length && d.name.toLowerCase().indexOf(currentSearch) === -1 ? "transparent";
-			// })
-			.attr("stroke-width", 1.5);
-		
+			});
+
+		 
+
+
+
 		
 		circles.on("mouseover", function(d){
 			d3.select(this).attr("fill", "grey");
 			d3.select("#openModal").select("h2").text(d.name);
-			d3.select("#openModal").select("h3").text(d.total);
+			d3.select("#openModal").select("h3").text(d3.format(",")(d.total));
 			d3.select("#openModal")
 				.style("top", d.y + 20 + "px")
-				.style("left", d.x + 225 + "px") //+140 is the center of the circle 
+				.style("left", d.x + 225 + "px") 
 				.classed("open", true);				
 			
 		});
@@ -200,6 +205,7 @@ function draw(nameData){
 		circles.on("mouseout", function(d){
 			d3.select(this).attr("fill", function(d){
 				return 	currentSearch.length && d.name.toLowerCase().indexOf(currentSearch) === 0 ? (d.gender == "M" ? "#01366B" : "#FA25A1") : (d.gender == "M" ? "cornflowerblue" : "pink");
+				console.log(d.name.toLowerCase().indexOf(currentSearch))
 			});
 			d3.select("#openModal").classed("open", false);
 		});
@@ -207,11 +213,18 @@ function draw(nameData){
 		circles.exit().transition().duration(100)
 		.attr("r", 0).remove();
 
-
-
-
-
+		var middleChild = nameData.filter(function(d){
+		return currentSearch.length || d.name.toLowerCase().indexOf(currentSearch) === 0;
+		}).length === 0;
 		
+		console.log(middleChild);
+		console.log(currentSearch.length);
+
+
+
+		d3.select("#middleChild").classed("visible", function(){
+			return currentSearch == middleChild;
+		});
 
 	}
 
@@ -226,10 +239,10 @@ function draw(nameData){
 		draw();
 	})
 
-	function drawBox(circle) {
-		console.log(circle.name + ": " + circle.total)
 
-	}
+	// function middleChild() {
+	// 	d3.select("#middleChild").classed("visible", middleChild);
+	// }
 
 
 
