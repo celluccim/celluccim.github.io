@@ -46,7 +46,7 @@ body {
 
 }
 
-svg {
+.babyNames {
 	width: 1215px;
 	height: 750px;
 	margin-left: 205px;
@@ -126,7 +126,7 @@ input.vertical {
 	-webkit-appearance: slider-vertical;
 	writing-mode: bt-lr;
 	width: 10px;
-	height: 300px;
+	height: 400px;
 	margin-top: 10px;
 }
 
@@ -204,9 +204,13 @@ font-family: 'Doppio One', sans-serif;	font-weight: bold;
 #middleChild {
 	font-family: 'Doppio One', sans-serif;
 	position: absolute;
-	top: 23px;
-	left: 220px;
-	opacity: 0;
+	top: 40px;
+	left: 240px;
+	opacity: 0;	
+}
+
+#middleChild h2 {
+	margin: 0;
 }
 
 #middleChild.visible {

@@ -44,7 +44,7 @@ title: Baby Names 5
 </div>
 
 
-<svg></svg>
+<svg class="babyNames"></svg>
 
 
 
@@ -214,17 +214,14 @@ function draw(nameData){
 		.attr("r", 0).remove();
 
 		var middleChild = nameData.filter(function(d){
-		return currentSearch.length || d.name.toLowerCase().indexOf(currentSearch) === 0;
+		return !currentSearch.length || d.name.toLowerCase().indexOf(currentSearch) === 0;
 		}).length === 0;
 		
 		console.log(middleChild);
 		console.log(currentSearch.length);
 
 
-
-		d3.select("#middleChild").classed("visible", function(){
-			return currentSearch == middleChild;
-		});
+		d3.select("#middleChild").classed("visible", middleChild);
 
 	}
 
