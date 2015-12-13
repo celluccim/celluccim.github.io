@@ -43,14 +43,16 @@ p#redParagraph {
 
 body {
 		background-color: #F7F4DC;
+		margin: 0;
 
 }
 
 .babyNames {
-	width: 1215px;
-	height: 750px;
-	margin-left: 205px;
+	width: 100%;
+	height: 100%;
+	//padding-left: 200px;
 	background-color: #F7F4DC;
+
 
 
 }
@@ -217,6 +219,30 @@ font-family: 'Doppio One', sans-serif;	font-weight: bold;
 
 #middleChild.visible {
 	opacity: 1;
+}
+
+#genderAll.clicked{
+	border: 1px solid #F0CC00;
+}
+
+#genderMale.clicked {
+	border: 1px solid #01366B;
+}
+
+#genderFemale.clicked {
+	border: 1px solid #FA25A1;
+}
+
+#genderAll {
+	border: 1px solid #F7F4DC;
+}
+
+#genderFemale {
+	border: 1px solid #F7F4DC;
+}
+
+#genderMale {
+	border: 1px solid #F7F4DC;
 }
 
 *:focus {

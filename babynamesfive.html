@@ -45,15 +45,21 @@ title: Baby Names 5
 </div>
 
 
-<svg class="babyNames"></svg>
-
+<svg class="babyNames" >
+</svg>
 
 
 
 
 <!--javascript/////////////////////////////////////////-->
 <script type="text/javascript">
+	function updateWindow(){
+	    x = window.innerWidth;
+	    y = window.innerHeight;
 
+	    d3.select(".babyNames").attr("width", x).attr("height", y);
+	}
+	window.onresize = updateWindow;
 
 	function outputUpdate(year) {
 		document.querySelector('#year').value = year;
@@ -72,7 +78,6 @@ title: Baby Names 5
 	var currentSearch = "";
 
 
-	
 			
 	// when the input range changes update the circle 
 	d3.select("#inputYear").on("input", function() {
@@ -122,7 +127,7 @@ title: Baby Names 5
 function draw(nameData){
 		var nameData = fullData[currentYear][currentGender]; 
 		var bubble = d3.layout.pack()
-		    .size([1215, 750]) //size of the container bubble
+		    .size([(window.innerWidth - 5), (window.innerHeight - 5)]) //size of the container bubble
 		    .padding(1.5) //space between inside bubbles
 		    .value(function(d) { return d.total; })
 		    .sort(function(){
@@ -185,7 +190,7 @@ function draw(nameData){
 			d3.select("#openModal").select("h3").text(d3.format(",")(d.total) + " born");
 			d3.select("#openModal")
 				.style("top", d.y + 20 + "px")
-				.style("left", d.x + 225 + "px") 
+				.style("left", d.x + 25 + "px") 
 				.classed("open", true);				
 
 			
@@ -222,30 +227,20 @@ function draw(nameData){
 		draw();
 	});
 
-	// d3.select(".genderButton").on("mousedown", function(){
-	// 	d3.select(this).attr("fill", function(){
-	// 		if(this.value == "ALL"){
-	// 			return "#F0CC00";
-	// 		}
-	// 		else if(this.value == "BOYS"){
-	// 			return "#01366B";
-	// 		}
-	// 		else{
-	// 			return "#FA25A1";
-	// 		}
-	// 	})
-	// });
-
-//d3.select("#genderAll").on("mousedown", mouseDown);
-d3.select("#genderAll").on("mousdown", function(){
-	d3.select(this).attr("fill", "#6B5E14");
-});
 	
-		
+	d3.select("#genderAll").on("mousedown", function(){
+			d3.select(this).classed("clicked", true);
+	});
 
-	function mouseDown() {
-	    console.log("mouseDown");
-	}
+	d3.select("#genderMale").on("mousedown", function(){
+		d3.select(this).classed("clicked", true);
+	});
+
+	d3.select("#genderFemale").on("mousedown", function(){
+		d3.select(this).classed("clicked", true);
+	});
+	
+	
 
 
 </script>
