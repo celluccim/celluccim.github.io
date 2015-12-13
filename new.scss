@@ -98,6 +98,8 @@ input.genderButton[value="ALL"]{
 
 input.nameTextBox[type=text]{
 	font-family: 'Doppio One', sans-serif;
+	// height: 20px;
+	padding: 10px;
 }
 
 #genderButtons {
@@ -215,5 +217,9 @@ font-family: 'Doppio One', sans-serif;	font-weight: bold;
 
 #middleChild.visible {
 	opacity: 1;
+}
+
+*:focus {
+    outline: none;
 }
 
