@@ -40,6 +40,7 @@ p#redParagraph {
 	bottom:0;
 	left: 0;
 	width:200px;
+	z-index: 1000;
 }
 
 body {
@@ -49,44 +50,29 @@ body {
 }
 
 .babyNames {
-	width: 100%;
+	width: calc(100% - 200px);
 	height: 100%;
-	//padding-left: 200px;
 	background-color: #F7F4DC;
-	// right: 0%;
-	// padding-left: 19%;
-
-
-
-}
-
-#gender_dropdown {
 	position: absolute;
-	top:30px;
-	margin-left:30px;
+	right: 0%;
+
+
+
 }
 
-
-// input.genderButton[type=text] {
-//     padding:5px; 
-//     border:2px solid #ccc; 
-//     -webkit-border-radius: 0px;
-//     border-radius: 0px;
-//     font-family: 'Doppio One', sans-serif;
-//     color: #4F4F4F;
-// }
-
-// input.genderButton[type=text]:focus {
-//     border-color:#333;
-//     font-family: 'Doppio One', sans-serif;
-// }
+#genderButtons {
+	position: absolute;
+	top: 16%;
+	margin-left: 30px;
+}
 
 .genderButton {
     padding:5px 8px; 
-    border:0 none;
+    border: 2px solid transparent;
     cursor:pointer;
     height: 30px;
     font-family: 'Doppio One', sans-serif;
+
 }
 
 .genderButton[value="GIRLS"]{
@@ -103,6 +89,14 @@ body {
 	background-color: #f1e974;
 	font-family: 'Doppio One', sans-serif;
 	color: #333;
+}
+
+.genderButton:hover {
+	opacity: .85;
+}
+
+.genderButton.active {
+	border: 2px solid #4F4F4F;
 }
 
 .nameTextBox[type=text]{
@@ -139,15 +133,9 @@ body {
    color: #4F4F4F;  
 }
 
-#genderButtons {
-	position: absolute;
-	top: 16%;
-	margin-left: 30px;
-}
 
-.genderButton:hover {
-	opacity: .85;
-}
+
+
 
 
 #year_dropdown {
@@ -165,11 +153,14 @@ body {
 
 
 
+
 input.vertical {
 	-webkit-appearance: slider-vertical;
 	writing-mode: bt-lr;
+	position: absolute;
+	top: 100%;
 	width: 10px;
-	height: 400px;
+	height: 375px;
 	margin-top: 10px;
 	
 }
@@ -249,6 +240,7 @@ input.vertical {
 	top: 40px;
 	left: 240px;
 	opacity: 0;	
+	z-index: 9999999999;
 }
 
 #middleChild h2 {
@@ -259,24 +251,75 @@ input.vertical {
 	opacity: 1;
 }
 
-.genderButton.active {
-	border: 1px solid #4F4F4F;
+#middleChild p {
+	font-size: 13px;
 }
 
-
-#genderAll {
-	border: 1px solid #F7F4DC;
-}
-
-#genderFemale {
-	border: 1px solid #F7F4DC;
-}
-
-#genderMale {
-	border: 1px solid #F7F4DC;
-}
 
 *:focus {
     outline: none;
+}
+
+#landingPage {
+	background-color: #F7F4DC;
+    height: 100%;
+    position: absolute;
+    width: 100%;
+    z-index: 9999999999999999999999999999;
+}
+
+.start {
+	position: absolute;
+	padding:5px 8px; 
+    border: 2px solid transparent;
+    cursor:pointer;
+    height: 30px;
+    font-family: 'Doppio One', sans-serif;
+    font-size: 24px;
+    top: 78%;
+    width: 100%;
+    height: 60px;
+    background-color: #48BD42;
+    color: #333;
+}
+
+
+.start:hover {
+	background-color: #94DB91;
+}
+
+.landingPage h1, h2, h3, h4, p {
+	font-family: 'Doppio One', sans-serif;
+	color: #333;
+}
+
+.landingPage h1 {
+	font-size: 60px;
+	margin: 25px 0px;
+}
+
+.landingPage h4 {
+	margin: 0px 0px;
+
+}
+
+#blurb {
+	margin-left: 5%;
+	margin-top: 8%;
+
+}
+
+.maleImg {
+	position: absolute;
+	width: 20%;
+	top: 27%;
+	left: 55%;
+}
+
+.femaleImg {
+	position: absolute;
+	width: 20%;
+	left: 75%;
+	top: 20%;
 }
 
