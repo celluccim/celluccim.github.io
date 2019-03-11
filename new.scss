@@ -33,7 +33,7 @@ p#redParagraph {
 //Baby Names CSS ///////////////////////////////////////////////////////////////////////////////////////////////
 #controls {
 	//background-color: #333;
-	background-color: #F7F4DC;
+	background-color: #f9fbf2;
 	display: block;
 	position: absolute;
 	top:0;
@@ -44,7 +44,7 @@ p#redParagraph {
 }
 
 body {
-		background-color: #F7F4DC;
+		background-color: #f9fbf2;
 		margin: 0;
 
 }
@@ -52,7 +52,7 @@ body {
 .babyNames {
 	width: calc(100% - 200px);
 	height: 100%;
-	background-color: #F7F4DC;
+	background-color: #f9fbf2;
 	position: absolute;
 	right: 0%;
 
@@ -268,24 +268,28 @@ input.vertical {
     z-index: 9999999999999999999999999999;
 }
 
-.start {
-	position: absolute;
-	padding:5px 8px; 
-    border: 2px solid transparent;
-    cursor:pointer;
-    height: 30px;
-    font-family: 'Doppio One', sans-serif;
-    font-size: 24px;
-    top: 78%;
-    width: 100%;
-    height: 60px;
-    background-color: #48BD42;
-    color: #333;
-}
+// .start {
+// 	position: absolute;
+// 	padding:5px 8px; 
+//     border: 2px solid transparent;
+//     cursor:pointer;
+//     height: 30px;
+//     font-family: 'Doppio One', sans-serif;
+//     font-size: 24px;
+//     top: 78%;
+//     width: 100%;
+//     height: 60px;
+//     background-color: #48BD42;
+//     color: #333;
+// }
 
+
+// .start:hover {
+// 	background-color: #94DB91;
+// }
 
 .start:hover {
-	background-color: #94DB91;
+	color: #333;
 }
 
 .landingPage h1, h2, h3, h4, p {
