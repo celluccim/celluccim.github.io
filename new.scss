@@ -268,29 +268,26 @@ input.vertical {
     z-index: 9999999999999999999999999999;
 }
 
-// .start {
-// 	position: absolute;
-// 	padding:5px 8px; 
-//     border: 2px solid transparent;
-//     cursor:pointer;
-//     height: 30px;
-//     font-family: 'Doppio One', sans-serif;
-//     font-size: 24px;
-//     top: 78%;
-//     width: 100%;
-//     height: 60px;
-//     background-color: #48BD42;
-//     color: #333;
-// }
+.start {
+	position: absolute;
+	padding:5px 8px; 
+    border: 2px solid transparent;
+    cursor:pointer;
+    height: 30px;
+    font-family: 'Doppio One', sans-serif;
+    font-size: 24px;
+    top: 78%;
+    width: 100%;
+    height: 60px;
+    background-color: #48BD42;
+    color: #333;
+}
 
-
-// .start:hover {
-// 	background-color: #94DB91;
-// }
 
 .start:hover {
-	color: #333;
+	background-color: #94DB91;
 }
+
 
 .landingPage h1, h2, h3, h4, p {
 	font-family: 'Doppio One', sans-serif;
