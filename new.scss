@@ -1,240 +1,324 @@
 ---
-layout: default
-title: Popular Baby Names
 ---
 
+$primary: #cc0000;
+$size: 20px;
+
+@mixin border($radius) {
+	-webkit-border-radius: $radius;
+	-moz-border-radius: $radius;
+	-ms-border-radius: $radius;
+	border-radius: $radius;
+}
 
 
-<!--Sidebar/////////////////////////////////////////-->
-<div id="controls">
+p#redParagraph {
+	color:$primary;
+	font-size: $size + 40;
+	padding: 50px;
+	background-color: blue;
+	@include border(10px);
+
+	a {
+	color: $primary;
+	font-weight: bold;
+	}	 
+}
+
+.blueParagraph {
+	color: blue;
+	font-size: 50px;
+}
+
+//Baby Names CSS ///////////////////////////////////////////////////////////////////////////////////////////////
+#controls {
+	//background-color: #333;
+	background-color: #F7F4DC;
+	display: block;
+	position: absolute;
+	top:0;
+	bottom:0;
+	left: 0;
+	width:200px;
+	z-index: 1000;
+}
+
+body {
+		background-color: #F7F4DC;
+		margin: 0;
+
+}
+
+.babyNames {
+	width: calc(100% - 200px);
+	height: 100%;
+	background-color: #F7F4DC;
+	position: absolute;
+	right: 0%;
+
+
+
+}
+
+#genderButtons {
+	position: absolute;
+	top: 16%;
+	margin-left: 30px;
+}
+
+.genderButton {
+    padding:5px 8px; 
+    border: 2px solid transparent;
+    cursor:pointer;
+    height: 30px;
+    font-family: 'Doppio One', sans-serif;
+
+}
+
+.genderButton[value="GIRLS"]{
+	background-color: pink;
+	font-family: 'Doppio One', sans-serif;
+	color: #333;
+}
+.genderButton[value="BOYS"]{
+	background-color: cornflowerblue;
+	font-family: 'Doppio One', sans-serif;
+	color: #333;
+}
+.genderButton[value="ALL"]{
+	background-color: #f1e974;
+	font-family: 'Doppio One', sans-serif;
+	color: #333;
+}
+
+.genderButton:hover {
+	opacity: .85;
+}
+
+.genderButton.active {
+	border: 2px solid #4F4F4F;
+}
+
+.nameTextBox[type=text]{
+	font-family: 'Doppio One', sans-serif;
+	// height: 20px;
+	padding: 10px 0px 3px 0px;
+	font-size: 19.2px;
+	width: 135px;
+	border: 0px solid #FCD700;
+	border-bottom: thin solid #4F4F4F;
+	color: #4F4F4F;
+	background-color: transparent;
+}
+
+#nameTextBox {
+	position: absolute;
+	top: 6%;
+	margin-left: 30px;
+}
+
+::-webkit-input-placeholder {
+   color: #4F4F4F;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   color: #4F4F4F;  
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   color: #4F4F4F;  
+}
+
+:-ms-input-placeholder {  
+   color: #4F4F4F;  
+}
+
+
+
+
+
+
+#year_dropdown {
+	position: absolute;
+	top:55px;
+	margin-left:30px;
+}
+
+#year_slider {
+	position: absolute;
+	top: 25%;
+	margin-left: 30px;
+}
+
+
+
+
+
+input.vertical {
+	-webkit-appearance: slider-vertical;
+	writing-mode: bt-lr;
+	position: absolute;
+	top: 100%;
+	width: 10px;
+	height: 375px;
+	margin-top: 10px;
 	
-	<div id="genderButtons">
-		<input type="submit" class="genderButton" id="genderAll" value="ALL" onclick="changeGender(this.value)">
-		<input type="submit" class="genderButton" id="genderMale" value="BOYS" onclick="changeGender(this.value)">
-		<input type="submit" class="genderButton" id="genderFemale" value="GIRLS" onclick="changeGender(this.value)">
-	</div>
+}
 
-	<div id="nameText">
-		<input type="text" id="nameTextBox" class="nameTextBox" placeholder="search a name" value="">
-	</div>
-
-	<div id="year_slider">
-		<!--the name of the slider-->
-		<label id="yearLabel" for="fader">Year</label>
-		<br>
-		<!--the output based on where the slider is-->
-		<output for="fader" id="year">2014</output>	
-		<br>
-		<!--input, the button of the slider-->
-		<input type="range" min="1880" max="2014" value="2014" id="inputYear" step="1" oninput="outputUpdate(value)" class="vertical" orient="vertical">
-		
-	</div>
-</div>
-
-<div id="openModal" class="modalDialog">
-	<div>
-		<h2></h2>
-		<h3></h3>
-	</div>
-
-</div>
-
-<div id="middleChild" class="middleChild">
-	<p></p>
-	<h2>Your parents didn't <br> love you.</h2>
-</div>
-
-<div id="landingPage" class="landingPage">
-	<div id="blurb">
-		<h1>Popular Baby Names</h1>
-		<h3>Is your name a flop or not?</h3>
-	</div>
-	<div id="images">
-		<img class="maleImg"src="img/male.png"></img>
-		<img class="femaleImg" src="img/female.png"></img>
-	</div>
-	<input type="button" class="start" id="start" value="START"></input>
-</div>
+#yearLabel {
+	font-family: 'Doppio One', sans-serif;	font-weight: medium;
+	font-size: 13px;
+	color: #4F4F4F;
+}
 
 
-<svg class="babyNames" >
-</svg>
+#year {
+	font-family: 'Doppio One', sans-serif;	font-weight: bold;
+	font-size: 58px;
+	color: #4F4F4F;
+}
 
 
 
+.modalDialog {
+	position: absolute;
+	font-family: 'Doppio One', sans-serif;	// width: 150px;
+	// height: 70px;
+	background: #EDEFF0;
+	z-index: 99999;
+	-webkit-transition: opacity 400ms ease-in;
+	-moz-transition: opacity 400ms ease-in;
+	transition: opacity 400ms ease-in;
+	opacity: 0;
+	pointer-events: none;
+	padding: 15px;
+	text-align: left;
+	box-shadow: 2px 2px 5px #666;
+}
 
-<!--javascript/////////////////////////////////////////-->
-<script type="text/javascript">
+.modalDialog.open {
+	opacity: 0.85;
 
-	
-	d3.select("#start").on("click", function(){
-	    d3.select("#landingPage").style("display", "none");
-	});
+}
 
-	
-	function outputUpdate(year) {
-		document.querySelector('#year').value = year;
-
-		//inside d3 slider year selecter, selecting the YOB file based on the year slider
-		d3.csv("data/yob" + year + ".csv", function(error, data){
-			//turning "total" into numbers
-			data.forEach(function(d){
-				d.total = parseFloat(d.total);
-			});
-
-			//all females
-			fData = data.filter(function(d){
-				return d.gender == "F";
-			}); 
-
-			fData = fData.slice(0, 500);
-
-			//only males
-			mData = data.filter(function(d){
-				return d.gender == "M";
-			});
-
-			mData = mData.slice(0, 500);
-
-			
-			var aData = mData.concat(fData);
-			fullData[year] = {
-			    "BOYS": mData,
-			    "GIRLS": fData,
-			    "ALL": aData
-			};
-
-			currentYear = year;
-
-			draw();
-			
-
-			});
-	}
-
-	
-	d3.select("#middleChild").classed("visible", false);
-
-	var mData = [];
-	var fData = [];
-	var minYear = 1880, maxYear = 2014;
-	var years = d3.range(minYear, maxYear + 1);
-	var mNames = [];
-	var fullData = {};
-	var currentYear;
-	var currentGender = "ALL";
-	var currentSearch = "";
+.close {
+	// background: #606061;
+	color: #999;
+	line-height: 25px;
+	position: absolute;
+	right: 12px;
+	text-align: center;
+	top: 12px;
+	width: 24px;
+	text-decoration: none;
+	font-weight: bold;
 
 
-function draw(nameData){
-
-		var nameData = fullData[currentYear][currentGender]; 
-		var bubble = d3.layout.pack()
-		    .size([(window.innerWidth - 205), (window.innerHeight - 5)]) //size of the container bubble
-		    .padding(1.5) //space between inside bubbles
-		    .value(function(d) { return d.total; })
-		    .sort(function(){
-		    	return (Math.random() * 10) - (Math.random() * 10);
-		    }); //the value is nuber we're using as the radius (total)
-
-		
-	    nameData = bubble({"children": nameData}); //what we're drawing >> name data
-	    nameData.shift(); //shifting the array down one (eliminating "parent")
-
-	  
-	    //creating the circles that we're drawing
-		var circles = d3.select("svg").selectAll("circle")
-			.data(nameData, function(d){
-				return d.name;
-			});
-
-		circles.enter().append("circle")
-			.attr("cy", function(d){
-				return d.y;
-			})
-			.attr("cx", function(d){ 
-				return d.x;
-			})
-			.attr("fill", function(d){
-				return 	d.gender == "M" ? "cornflowerblue" : "pink";
-			})
-
-			.attr("r", 0);
+}
 
 
-		circles.transition().duration(100)
-			.attr("r", function(d){
-				return d.r;
-			})
-			.attr("fill", function(d){
-				return 	d.gender == "M" ? "cornflowerblue" : "pink";
-			})
-			.attr("cy", function(d){
-				return d.y;
-			})
-			.attr("cx", function(d){ 
-				return d.x;
-			})
-			.attr("fill", function(d){
-				return currentSearch.length && d.name.toLowerCase().indexOf(currentSearch) === 0 ? (d.gender == "M" ? "#01366B" : "#FA25A1") : (d.gender == "M" ? "cornflowerblue" : "pink");
-			});
+.modalDialog h2 {
+	color: #4E4E4E;
+	font-size: 24px;
+	margin-bottom: 0px;
+	margin-top: 0px;
+	font-family: 'Doppio One', sans-serif;
 
-		
-		circles.on("mouseover", function(d){
-			d3.select(this).attr("fill", "grey");
-			d3.select("#openModal").select("h2").text(d.name);
-			d3.select("#openModal").select("h3").text(d3.format(",")(d.total) + " born");
-			d3.select("#openModal")
-				.style("top", d.y + 20 + "px")
-				.style("left", d.x + 225 + "px") 
-				.classed("open", true);				
-		});
+}
 
+.modalDialog h3 {
+	color: #4E4E4E;
+	font-size: 12px;
+	margin-top: 6px;
+	margin-bottom: 0px;
+	font-family: 'Doppio One', sans-serif;
+}
 
-		circles.on("mouseout", function(d){
-			d3.select(this).attr("fill", function(d){
-				return 	currentSearch.length && d.name.toLowerCase().indexOf(currentSearch) === 0 ? (d.gender == "M" ? "#01366B" : "#FA25A1") : (d.gender == "M" ? "cornflowerblue" : "pink");
-			});
-			d3.select("#openModal").classed("open", false);
-		});
+#middleChild {
+	font-family: 'Doppio One', sans-serif;
+	position: absolute;
+	top: 40px;
+	left: 240px;
+	opacity: 0;	
+	z-index: 9999999999;
+}
 
+#middleChild h2 {
+	margin: 0;
+}
 
-		circles.exit().transition().duration(100)
-		.attr("r", 0).remove();
+#middleChild.visible {
+	opacity: 1;
+}
+
+#middleChild p {
+	font-size: 13px;
+}
 
 
-		var middleChild = nameData.filter(function(d){
-		return !currentSearch.length || d.name.toLowerCase().indexOf(currentSearch) === 0;
-		}).length === 0;
-	
+*:focus {
+    outline: none;
+}
 
-		d3.select("#middleChild").classed("visible", middleChild);
+#landingPage {
+	background-color: #F7F4DC;
+    height: 100%;
+    position: absolute;
+    width: 100%;
+    z-index: 9999999999999999999999999999;
+}
 
-	}
-
-	function changeGender(genderValue) {
-
-		currentGender = genderValue;
-		d3.selectAll(".genderButton").classed("active", function(){
-			return this.value === genderValue;
-
-		});
-
-		draw();
-	}
-
-	d3.select("#nameTextBox").on("keyup", function(){
-		currentSearch = this.value.toLowerCase();
-
-		d3.select("#middleChild").select("p").text(currentSearch.toUpperCase() + " is not in the top 500 names.");
-
-		draw();
-	});
-
-	
-	outputUpdate(2014);
+.start {
+	position: absolute;
+	padding:5px 8px; 
+    border: 2px solid transparent;
+    cursor:pointer;
+    height: 30px;
+    font-family: 'Doppio One', sans-serif;
+    font-size: 24px;
+    top: 78%;
+    width: 100%;
+    height: 60px;
+    background-color: #48BD42;
+    color: #333;
+}
 
 
-</script>
+.start:hover {
+	background-color: #94DB91;
+}
 
+.landingPage h1, h2, h3, h4, p {
+	font-family: 'Doppio One', sans-serif;
+	color: #333;
+}
 
+.landingPage h1 {
+	font-size: 60px;
+	margin: 25px 0px;
+}
+
+.landingPage h4 {
+	margin: 0px 0px;
+
+}
+
+#blurb {
+	margin-left: 5%;
+	margin-top: 8%;
+
+}
+
+.maleImg {
+	position: absolute;
+	width: 20%;
+	top: 27%;
+	left: 55%;
+}
+
+.femaleImg {
+	position: absolute;
+	width: 20%;
+	left: 75%;
+	top: 20%;
+}
