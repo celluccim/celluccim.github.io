@@ -1,0 +1,10 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["GK8634N5ZV.com.maggiecellucci.alarmgroups"],
+        "components": [{ "/": "/alarmgroups/share*", "comment": "AlarmGroups share links" }]
+      }
+    ]
+  }
+}

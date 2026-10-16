@@ -1,0 +1,2 @@
+# Jekyll skips dot-folders by default; iOS reads universal-link settings from /.well-known.
+include: [".well-known"]
