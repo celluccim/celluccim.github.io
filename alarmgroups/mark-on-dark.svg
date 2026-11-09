@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 720 780">
+  <!-- Generator: Adobe Illustrator 30.8.2, SVG Export Plug-In . SVG Version: 2.1.4 Build 7)  -->
+  <defs>
+    <style>
+      .st0 {
+        stroke-width: 56px;
+      }
+
+      .st0, .st1 {
+        stroke: #10264f;
+      }
+
+      .st0, .st1, .st2, .st3 {
+        fill: none;
+      }
+
+      .st0, .st1, .st3 {
+        stroke-linecap: round;
+      }
+
+      .st1, .st3 {
+        stroke-width: 48px;
+      }
+
+      .st4 {
+        fill: #7ba7ff;
+        stroke: #7ba7ff;
+      }
+
+      .st4, .st5, .st6, .st7, .st8 {
+        stroke-linejoin: round;
+        stroke-width: 28px;
+      }
+
+      .st5 {
+        fill: #ffc93c;
+        stroke: #ffc93c;
+      }
+
+      .st9 {
+        fill: #10264f;
+      }
+
+      .st6 {
+        fill: #b4cdff;
+        stroke: #b4cdff;
+      }
+
+      .st2 {
+        stroke-width: 40px;
+      }
+
+      .st2, .st3 {
+        stroke: #fff;
+      }
+
+      .st10 {
+        fill: #fff;
+      }
+
+      .st7 {
+        fill: #dce8ff;
+        stroke: #dce8ff;
+      }
+
+      .st8 {
+        fill: #2a66f5;
+        stroke: #2a66f5;
+      }
+    </style>
+  </defs>
+  <line class="st3" x1="186" y1="652" x2="116" y2="736"/>
+  <line class="st3" x1="534" y1="652" x2="604" y2="736"/>
+  <line class="st3" x1="158.1" y1="117.5" x2="113.7" y2="60.8"/>
+  <line class="st3" x1="90.1" y1="79.3" x2="137.4" y2="42.3"/>
+  <line class="st3" x1="561.9" y1="117.5" x2="606.3" y2="60.8"/>
+  <line class="st3" x1="582.6" y1="42.3" x2="629.9" y2="79.3"/>
+  <circle class="st2" cx="360" cy="376" r="320"/>
+  <path class="st5" d="M360,325l-122.8-169c76.3-42.6,169.3-42.6,245.6,0l-122.8,169Z"/>
+  <path class="st8" d="M408.5,360.2l122.8-169c64.1,59.4,92.8,147.8,75.9,233.6l-198.7-64.6Z"/>
+  <path class="st4" d="M390,417.3l198.7,64.6c-36.7,79.3-111.9,134-198.7,144.4v-208.9Z"/>
+  <path class="st6" d="M330,417.3v208.9c-86.8-10.4-162-65-198.7-144.4l198.7-64.6Z"/>
+  <path class="st7" d="M311.5,360.2l-198.7,64.6c-16.9-85.8,11.8-174.2,75.9-233.6l122.8,169Z"/>
+  <line class="st0" x1="360" y1="376" x2="280" y2="514.6"/>
+  <line class="st1" x1="360" y1="376" x2="360" y2="148"/>
+  <circle class="st9" cx="360" cy="376" r="36"/>
+  <circle class="st10" cx="360" cy="376" r="13"/>
+</svg>

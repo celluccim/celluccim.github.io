@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Help and support · AlarmBatch</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root { color-scheme: light dark; --surface: #F5F8FF; --raised: #FFFFFF; --ink: #10264F; --muted: #4A5B7A; --border: #DCE4F2; --brand: #2A66F5; }
+    @media (prefers-color-scheme: dark) { :root { --surface: #0B1B3A; --raised: #10264F; --ink: #F5F8FF; --muted: #B4CDFF; --border: #2A4275; --brand: #7BA7FF; } }
+    body { margin: 0; background: var(--surface); color: var(--ink); font: 16px/1.5 Nunito, ui-rounded, -apple-system, sans-serif; }
+    main { max-width: 40rem; margin: 0 auto; padding: 32px 16px 48px; }
+    .card { background: var(--raised); border: 1px solid var(--border); border-radius: 22px; padding: 24px; }
+    .mark { display: block; width: 64px; height: auto; margin-bottom: 16px; }
+    .mark.dark { display: none; }
+    @media (prefers-color-scheme: dark) { .mark.light { display: none; } .mark.dark { display: block; } }
+    h1 { font-size: 32px; line-height: 38px; font-weight: 800; margin: 0 0 8px; }
+    h2 { font-size: 22px; line-height: 28px; font-weight: 700; margin: 24px 0 8px; }
+    p, li { margin: 8px 0; }
+    .muted { color: var(--muted); }
+    a { color: var(--brand); font-weight: 700; }
+    .center { text-align: center; }
+    .center .mark { margin: 0 auto 16px; }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="card">
+      <img class="mark light" src="../mark-on-light.svg" alt="">
+      <img class="mark dark" src="../mark-on-dark.svg" alt="">
+      <h1>Help and support</h1>
+      <p>Questions, ideas or something not working? Email <a href="mailto:celluccimargaret@gmail.com?subject=AlarmBatch">celluccimargaret@gmail.com</a> and include your iPhone model and iOS version. We usually reply within a few days.</p>
+
+      <h2>My alarm didn't ring</h2>
+      <ul>
+        <li>Open Settings in AlarmBatch and check Alarm permission says Allowed. If not, tap Open system settings and turn Alarms on.</li>
+        <li>Check the alarm and its batch are both switched on, and the batch's end date hasn't passed.</li>
+        <li>If an alarm says "Not set yet", tap it to set it.</li>
+      </ul>
+
+      <h2>Restore AlarmBatch Pro</h2>
+      <p>Open Settings and tap Restore purchases, signed in with the Apple Account you bought it with. Pro carries across your devices.</p>
+
+      <h2>Cancel or manage Pro</h2>
+      <p>Open Settings, then Manage Pro, or go to the Settings app › your name › Subscriptions.</p>
+
+      <h2>Open a shared batch</h2>
+      <p>Tap the link on an iPhone with AlarmBatch installed. If it opens in Safari, go back to Messages, tap and hold the link, and choose Open in AlarmBatch.</p>
+
+      <p class="muted"><a href="../privacy/">Privacy policy</a></p>
+    </div>
+  </main>
+</body>
+</html>

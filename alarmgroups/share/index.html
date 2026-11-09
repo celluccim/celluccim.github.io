@@ -4,24 +4,37 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex">
-  <title>Shared alarm · AlarmGroups</title>
+  <title>Shared alarm · AlarmBatch</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
   <style>
-    :root { color-scheme: light dark; --bg: #f2f2f7; --card: #fff; --text: #1c1c1e; --muted: #6c6c70; }
-    @media (prefers-color-scheme: dark) { :root { --bg: #000; --card: #1c1c1e; --text: #f2f2f7; --muted: #98989f; } }
-    body { margin: 0; min-height: 100vh; display: grid; place-items: center; background: var(--bg); color: var(--text);
-      font: 17px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
-    main { max-width: 26rem; margin: 16px; padding: 28px 24px; background: var(--card); border-radius: 20px; text-align: center; }
-    .icon { font-size: 44px; }
-    h1 { font-size: 22px; margin: 8px 0; }
-    p { color: var(--muted); margin: 8px 0 0; }
+    :root { color-scheme: light dark; --surface: #F5F8FF; --raised: #FFFFFF; --ink: #10264F; --muted: #4A5B7A; --border: #DCE4F2; --brand: #2A66F5; }
+    @media (prefers-color-scheme: dark) { :root { --surface: #0B1B3A; --raised: #10264F; --ink: #F5F8FF; --muted: #B4CDFF; --border: #2A4275; --brand: #7BA7FF; } }
+    body { margin: 0; background: var(--surface); color: var(--ink); font: 16px/1.5 Nunito, ui-rounded, -apple-system, sans-serif; }
+    main { max-width: 40rem; margin: 0 auto; padding: 32px 16px 48px; }
+    .card { background: var(--raised); border: 1px solid var(--border); border-radius: 22px; padding: 24px; }
+    .mark { display: block; width: 64px; height: auto; margin-bottom: 16px; }
+    .mark.dark { display: none; }
+    @media (prefers-color-scheme: dark) { .mark.light { display: none; } .mark.dark { display: block; } }
+    h1 { font-size: 32px; line-height: 38px; font-weight: 800; margin: 0 0 8px; }
+    h2 { font-size: 22px; line-height: 28px; font-weight: 700; margin: 24px 0 8px; }
+    p, li { margin: 8px 0; }
+    .muted { color: var(--muted); }
+    a { color: var(--brand); font-weight: 700; }
+    .center { text-align: center; }
+    .center .mark { margin: 0 auto 16px; }
   </style>
 </head>
 <body>
   <main>
-    <div class="icon" aria-hidden="true">⏰</div>
-    <h1>Someone shared alarms with you</h1>
-    <p>Open this link on an iPhone with AlarmGroups installed to add them.</p>
-    <p>If it opened in Safari, tap and hold the link in Messages and choose “Open in AlarmGroups”.</p>
+    <div class="card center">
+      <img class="mark light" src="../mark-on-light.svg" alt="">
+      <img class="mark dark" src="../mark-on-dark.svg" alt="">
+      <h1>Someone shared alarms with you</h1>
+      <p class="muted">Open this link on an iPhone with AlarmBatch installed to add them.</p>
+      <p class="muted">If it opened in Safari, tap and hold the link in Messages and choose “Open in AlarmBatch”.</p>
+    </div>
   </main>
 </body>
 </html>
